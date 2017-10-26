@@ -2,8 +2,8 @@ import scala.collection.mutable.ListBuffer
 
 class Shopping_Mart {
 
-  val orangePrice: BigDecimal = BigDecimal(0.60)
-  val applePrice: BigDecimal = BigDecimal(0.25)
+  val orangePrice: BigDecimal = BigDecimal(0.25)
+  val applePrice: BigDecimal = BigDecimal(0.60)
 
   var subTotalOrange: BigDecimal = BigDecimal(0);
   var subTotalApple: BigDecimal = BigDecimal(0);
@@ -49,16 +49,21 @@ class Shopping_Mart {
         Total += subTotalOrange
       }
 
-      if (each_map._2 >= 1 && each_map._1 == "Apple") {
-        if(each_map._2%2==0){
-          subTotalApple = applePrice * (each_map._2/2)
+
+      if (each_map._2 >= 1 && each_map._1 == "Apple"&& (!isDiscountON==true)) {
+          subTotalApple = applePrice * (each_map._2)
           Total += subTotalApple
-        }
-        else if (each_map._2%2 !=0){
-          subTotalApple = applePrice * (each_map._2/2 + 1)
-          Total += subTotalApple
-        }
       }
+
+      if (each_map._2%2 ==0 && isDiscountON==true ){
+        subTotalApple = applePrice * (each_map._2/2 )
+        Total += subTotalApple
+      }
+
+      if(each_map._2%2 !=0 && isDiscountON==true){
+        subTotalApple = (each_map._2/2) * applePrice + applePrice
+        }
+
       else {
         BigDecimal(0)
       } // Terminate loop
