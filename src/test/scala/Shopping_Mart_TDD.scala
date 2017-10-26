@@ -55,9 +55,9 @@ class Shopping_Mart_TDD extends FunSuite with BeforeAndAfter with Matchers {
     shop.totalPrice()
     val orangeTotal: BigDecimal =  shop.subTotalOrange
 
-    assert(orangeTotal== 1.20)
+    assert(orangeTotal== 0.5)
     val appleTotal: BigDecimal = shop.subTotalApple
-    assert(appleTotal==0.5)
+    assert(appleTotal==2.4)
     val TotalCost: BigDecimal = shop.Total
     assert(TotalCost == (orangeTotal+appleTotal))
   }
@@ -67,16 +67,15 @@ class Shopping_Mart_TDD extends FunSuite with BeforeAndAfter with Matchers {
 
   test("GivenBOGOFOnEvenAndOddCountThenReturnNewSumForApple"){
     shop.readItems("Apple,Apple,Apple,Apple,Apple,Apple,Apple,Apple,Apple,Apple")
+    shop.setDiscountOnOrange()
 
-    val Mapping: Map[String,Int]  = shop.itemfrequencyMapping
     shop.totalPrice()
     val evenCountAppleTotal: BigDecimal = shop.subTotalApple
-    assert(evenCountAppleTotal==1.25)
-
-    shop.readItems("Apple,Apple,Apple") //print(shop.total_items) # 3
+    assert(evenCountAppleTotal==3.0)
+    shop.readItems("Apple,Apple,Apple")
     shop.totalPrice()
     val oddCountAppleTotal: BigDecimal = shop.subTotalApple
-    assert(oddCountAppleTotal==0.5)
+    assert(oddCountAppleTotal==1.2)
   }
 
   // Test specification: Update price for three bananas bought at cost of two.
@@ -89,14 +88,16 @@ class Shopping_Mart_TDD extends FunSuite with BeforeAndAfter with Matchers {
     shop.setDiscountOnOrange()
     shop.totalPrice()
     val evenOrangeTotal: BigDecimal = shop.subTotalOrange
-    assert(evenOrangeTotal == BigDecimal(6 * 0.6).setScale(2,BigDecimal.RoundingMode.HALF_UP))
+    assert(evenOrangeTotal == BigDecimal(6 * 0.25).setScale(2,BigDecimal.RoundingMode.HALF_UP))
 
-/*
-    shop.readItems("Orange,Orance,Orange,Orange")
+  }
+  test("asa"){
+    shop.readItems("Apple,Apple,Orange,Apple")
     shop.totalPrice()
-    val EvenOrangeCountAndOneLoneOrangeTotal: BigDecimal = shop.subTotalOrange
-    assert(EvenOrangeCountAndOneLoneOrangeTotal == BigDecimal((5%3 +2)*0.6).setScale(2,BigDecimal.RoundingMode.HALF_UP))
-  */
+    val tot1: BigDecimal = shop.subTotalApple
+    val tot2: BigDecimal = shop.subTotalOrange
+    assert(tot1+tot2 == BigDecimal(1.8+0.25))
+
   }
 
 
