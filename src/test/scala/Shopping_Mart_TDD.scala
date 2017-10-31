@@ -121,18 +121,12 @@ class Shopping_Mart_TDD extends FunSuite with BeforeAndAfter with Matchers {
 
     sales.getApplePrice()
     sales.getOrangePrice()
-    sales.getOtherItemPrice()
+    //sales.getOtherItemPrice()
 
 
     val scannedInstancesonSaleService = sales.martObjects()
-    val ortotal = sales.orangeTotal()
-val aptotal = sales.appleTotal()
-    val ottotal=sales.otherItemTotal()
-    print(ortotal,aptotal,ottotal)
-
-    //scannedInstancesonSaleService.foreach(println)
-    //print(sales.getApplePrice,sales.orange_unit_price)
-
+    sales.Total()
+    print(sales.appletotal,sales.orangetotal,sales.othertotal)
   }
 
 }
@@ -206,7 +200,14 @@ val aptotal = sales.appleTotal()
 /* Realisations/iSSUES: i) Set price is embedded onto the last class "ProcessScanService" which breaks SHoppingMart instantiation => Unit()
 (ii) Set price method for each i.e appale,orange item on the base class Shopping mart.
 (iii) During inheriting attributes, the child class must have methods to get them
+(iv) Mistake found on implicit implementation since items passed are being passed on to the getOtherItem function even though NO DIRECT call is being made, since the condition: @
+if (n.isInstanceOf[Item] && k == false) {
+          otheritemTotal += s * c //
+IS FULFILLED FOR CASES WHEN ITEM PASSED, != APPLE OR ORANGE ARE STILL INSTSNCES OF ITEM!
+Correct version:
 
+if (n.isInstanceOf[Item] && k == false) {
+          otheritemTotal = s * c //
 
 
 
