@@ -3,6 +3,7 @@
 * (i) Scanned object mappings from the SHopping_Mart
 * (ii) Call of implicit function as defined on ImplicitMethod
 * (iii) Usw of the Discount Switch
+* (iv)
 */
 class ProcessSaleService (shop:Shopping_Mart)  extends Shopping_Mart with ImplicitMethods with DiscountService {
 
