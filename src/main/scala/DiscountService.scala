@@ -1,5 +1,4 @@
-
-
+// A discount On/Off switch
 trait DiscountService {
   var discountKey: Boolean = false
 

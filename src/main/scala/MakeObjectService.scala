@@ -1,4 +1,4 @@
-
+// Produce dynamic objects of all the scanned items (input string) @ class: Shopping_Mar
 class MakeObjectService {
   var appleinstance: Any = 0
   var orangeinstance: Any = 0
@@ -8,7 +8,6 @@ class MakeObjectService {
     if (item_name == "Apple") {
       appleinstance = Class.forName("Apple").newInstance().asInstanceOf[ {def setName(item_name: String): String}]
     }
-
     appleinstance.asInstanceOf[Apple]
   }
 
@@ -16,7 +15,6 @@ class MakeObjectService {
     if (item_name == "Orange") {
       orangeinstance = Class.forName("Orange").newInstance().asInstanceOf[ {def setName(item_name: String): String}]
     }
-
     orangeinstance.asInstanceOf[Orange]
   }
 
@@ -26,7 +24,6 @@ class MakeObjectService {
     }
     otherinstance.asInstanceOf[otherItems]
   }
-
 }
 
 abstract class Item{def setName(item:String):String}
